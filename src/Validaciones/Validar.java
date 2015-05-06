@@ -20,6 +20,8 @@ public class Validar {
     private static final String EMAIL_PATTERN
             = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
             + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
+    private static final String USER_NAME = "faherrera2";
+    private static final String USER_PASS = "1234";
 
     public Validar() {
         pattern = Pattern.compile(EMAIL_PATTERN);
@@ -38,6 +40,14 @@ public class Validar {
         int d2 = fechaActual.get(GregorianCalendar.DAY_OF_MONTH);
         int edad = (a2 - a - 1) + (m2 == m ? (d2 >= d ? 1 : 0) : m2 >= m ? 1 : 0);
         return edad;
+    }
+    
+    public boolean ValidarIngreso(String strUser, String strPass){
+        boolean resultado = false;
+        if(USER_NAME.equals(strUser) && USER_PASS.equals(strPass)){
+            return true;
+        }
+    return resultado;
     }
 
 }
