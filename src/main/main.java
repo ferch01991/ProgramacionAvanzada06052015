@@ -58,11 +58,11 @@ public class main {
 //            
 //            r.GuardaArchivo(c1);
 //        }
-//        JFIngreso ingreso = new JFIngreso();
-//        ingreso.show();
+        JFIngreso ingreso = new JFIngreso();
+        ingreso.setLocationRelativeTo(null);
+        ingreso.show();
         
-        JFRegistro registro = new JFRegistro();
-        registro.show();
+        
     }
 
 }
