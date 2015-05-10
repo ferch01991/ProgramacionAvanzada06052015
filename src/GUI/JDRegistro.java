@@ -210,6 +210,19 @@ public class JDRegistro extends javax.swing.JDialog {
         
     }//GEN-LAST:event_txtApellidoActionPerformed
 
+    public void ValidarCampos(){
+        if(txtId.getText().isEmpty() || txtNombre.getText().isEmpty() || txtApellido.getText().isEmpty()
+                || txtDireccion.getText().isEmpty() || txtFechaNace.getText().isEmpty() || txtEmail.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null, "Todos los capos son requeridos" );
+        }else{
+
+            JOptionPane.showMessageDialog(rootPane, "Id: "+txtId.getText()+
+                    "\nNombre: "+txtNombre.getText()+"\nApellido: "+txtApellido.getText()+
+                    "\nDireccion: "+txtDireccion.getText()+"\nFecha de nacimiento: "+txtFechaNace.getText()
+            +"\nEmail: " +txtEmail.getText());
+        }
+        
+    }
     public Cliente enviarObjeto(){
         c = new Cliente();
         c.setStrIdentificacion(txtId.getText());
@@ -228,6 +241,7 @@ public class JDRegistro extends javax.swing.JDialog {
     }
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         // TODO add your handling code here:
+        ValidarCampos();
         enviarObjeto();
         Registrar r = new Registrar();
         try {
