@@ -5,6 +5,8 @@
  */
 package Validaciones;
 
+import Clases.Registrar;
+import java.io.IOException;
 import java.util.GregorianCalendar;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -20,8 +22,6 @@ public class Validar {
     private static final String EMAIL_PATTERN
             = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
             + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
-    private static final String USER_NAME = "faherrera2";
-    private static final String USER_PASS = "1234";
 
     public Validar() {
         pattern = Pattern.compile(EMAIL_PATTERN);
@@ -42,11 +42,10 @@ public class Validar {
         return edad;
     }
     
-    public boolean ValidarIngreso(String strUser, String strPass){
+    public boolean ValidarIngreso(String strUser, String strPass) throws IOException{
         boolean resultado = false;
-        if(USER_NAME.equals(strUser) && USER_PASS.equals(strPass)){
-            return true;
-        }
+        Registrar r = new Registrar();
+        resultado = r.leerArchivo(strUser, strPass);
     return resultado;
     }
 

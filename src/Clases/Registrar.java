@@ -6,11 +6,7 @@
 
 package Clases;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 
 /**
@@ -48,15 +44,40 @@ public class Registrar {
     }
     // Enviar a guardar un objeto
     public void GuardaArchivoObjeto(Cliente c) throws FileNotFoundException, IOException{
-        File f = new File("C:\\Users\\Administrador\\Documents\\NetBeansProjects\\datos.txt");
+        File f = new File("C:\\Users\\Fernando\\Documents\\NetBeansProjects\\ProgramacionAvanzada06052015\\datos.txt");
         FileWriter fw = new FileWriter(f,true);
         BufferedWriter bw = new BufferedWriter(fw);
-        bw.write(c.strIdentificacion);
-        bw.write(c.strNombres);
-        bw.write(c.strApellidos);
-        bw.write(c.strDireccion);
-        bw.write(c.strEmail);
+        bw.newLine();
+        bw.write(c.strIdentificacion+",");
+        bw.write(c.strNombres+",");
+        bw.write(c.strApellidos+",");
+        bw.write(c.strDireccion+",");
+        bw.write(c.strEmail+",");
+        bw.write(c.strUserName+",");
+        bw.write(c.strPassword);
         bw.close();
         fw.close();
+    }
+    
+    public boolean leerArchivo(String user, String pass) throws FileNotFoundException, IOException{
+        File f = new File("C:\\Users\\Fernando\\Documents\\NetBeansProjects\\ProgramacionAvanzada06052015\\datos.txt");
+        FileReader fr = new FileReader(f);
+        BufferedReader br = new BufferedReader(fr);
+        String linea, userName = "", password="";
+        while((linea=br.readLine())!=null){
+            int i=0;
+            for(String datos:linea.split(",")){
+                i++;
+                if(i==6)
+                    userName = datos;
+                if(i==7)
+                    password = datos;
+            }
+        }
+        if(userName.equals(user) && password.equals(pass)){
+            return true;
+        }
+        
+        return false;
     }
 }

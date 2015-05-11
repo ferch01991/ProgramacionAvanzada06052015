@@ -1,0 +1,6 @@
+565,Jose,Perez,Loja,jose@gmail.com,jose,jose
+565,Jose,Perez,Loja,jose@gmail.com,jose,jose
+212,Fernando,Herrera,Loja,faherrera2@utpl.edu.ec,faherrera2,faherrera2
+
+45,Angel,Criollo,Loja,angel@gmail.com,angel,angel
+12,Jandry,Requelme,Loja,jandry@gmail.com,jandry,jandry

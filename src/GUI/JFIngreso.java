@@ -6,6 +6,9 @@
 package GUI;
 
 import Validaciones.Validar;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -37,7 +40,7 @@ public class JFIngreso extends javax.swing.JFrame {
         txtPassword = new javax.swing.JPasswordField();
         btnIngresar = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
+        lblRegistrar = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -70,11 +73,11 @@ public class JFIngreso extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setText("Registrarse");
-        jLabel1.setToolTipText("Click para registrarse");
-        jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
+        lblRegistrar.setText("Registrarse");
+        lblRegistrar.setToolTipText("Click para registrarse");
+        lblRegistrar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel1MouseClicked(evt);
+                lblRegistrarMouseClicked(evt);
             }
         });
 
@@ -95,7 +98,7 @@ public class JFIngreso extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(23, 23, 23)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel1)
+                            .addComponent(lblRegistrar)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(lblPassword)
@@ -120,7 +123,7 @@ public class JFIngreso extends javax.swing.JFrame {
                     .addComponent(lblPassword)
                     .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel1)
+                .addComponent(lblRegistrar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnIngresar)
@@ -134,7 +137,12 @@ public class JFIngreso extends javax.swing.JFrame {
     private void btnIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngresarActionPerformed
         // TODO add your handling code here:
         Validar v = new Validar();
-        boolean resultado = v.ValidarIngreso(txtUserName.getText(), txtPassword.getText());
+        boolean resultado = false;
+        try {
+            resultado = v.ValidarIngreso(txtUserName.getText(), txtPassword.getText());
+        } catch (IOException ex) {
+            Logger.getLogger(JFIngreso.class.getName()).log(Level.SEVERE, null, ex);
+        }
         if(resultado == true){
             JOptionPane.showMessageDialog(null, "Ingreso correcto");
         }else{
@@ -151,12 +159,12 @@ public class JFIngreso extends javax.swing.JFrame {
         
     }//GEN-LAST:event_btnCancelarActionPerformed
 
-    private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
+    private void lblRegistrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblRegistrarMouseClicked
         // TODO add your handling code here:
         JDRegistro dialog = new JDRegistro(new javax.swing.JFrame(), true);
         dialog.setLocationRelativeTo(null);
         dialog.setVisible(true);
-    }//GEN-LAST:event_jLabel1MouseClicked
+    }//GEN-LAST:event_lblRegistrarMouseClicked
 
     /**
      * @param args the command line arguments
@@ -196,8 +204,8 @@ public class JFIngreso extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnIngresar;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel lblPassword;
+    private javax.swing.JLabel lblRegistrar;
     private javax.swing.JLabel lblUsername;
     private javax.swing.JLabel lblingreso;
     private javax.swing.JPasswordField txtPassword;

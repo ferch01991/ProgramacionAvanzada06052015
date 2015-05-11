@@ -3,11 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package GUI;
 
 import Clases.Cliente;
 import Clases.Registrar;
+import Validaciones.Validar;
 import java.io.IOException;
 import javax.swing.JOptionPane;
 
@@ -23,7 +23,8 @@ public class JDRegistro extends javax.swing.JDialog {
     Cliente c;
     //solucion 2
     Cliente retornarCliente;
-    
+    Validar v = new Validar();
+
     public JDRegistro(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
@@ -207,32 +208,49 @@ public class JDRegistro extends javax.swing.JDialog {
     }//GEN-LAST:event_txtNombreActionPerformed
 
     private void txtApellidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtApellidoActionPerformed
-        
+
     }//GEN-LAST:event_txtApellidoActionPerformed
 
-    public void ValidarCampos(){
-        if(txtId.getText().isEmpty() || txtNombre.getText().isEmpty() || txtApellido.getText().isEmpty()
-                || txtDireccion.getText().isEmpty() || txtFechaNace.getText().isEmpty() || txtEmail.getText().isEmpty()){
-            JOptionPane.showMessageDialog(null, "Todos los capos son requeridos" );
-        }else{
-
-            JOptionPane.showMessageDialog(rootPane, "Id: "+txtId.getText()+
-                    "\nNombre: "+txtNombre.getText()+"\nApellido: "+txtApellido.getText()+
-                    "\nDireccion: "+txtDireccion.getText()+"\nFecha de nacimiento: "+txtFechaNace.getText()
-            +"\nEmail: " +txtEmail.getText());
+    public boolean ValidarCampos() {
+        if (txtId.getText().isEmpty() || txtNombre.getText().isEmpty() || txtApellido.getText().isEmpty()
+                || txtDireccion.getText().isEmpty() || txtFechaNace.getText().isEmpty() || txtEmail.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Todos los capos son requeridos");
+            return false;
+        } else {
+            int opc = JOptionPane.showConfirmDialog(null, "Id: " + txtId.getText()
+                    + "\nNombre: " + txtNombre.getText() + "\nApellido: " + txtApellido.getText()
+                    + "\nDireccion: " + txtDireccion.getText() + "\nFecha de nacimiento: " + txtFechaNace.getText()
+                    + "\nEmail: " + txtEmail.getText(), "VERIFICAR DATOS", JOptionPane.OK_CANCEL_OPTION);
+            if (opc == JOptionPane.CANCEL_OPTION) {
+                JOptionPane.showMessageDialog(null, "Rectificar datos");
+                return false;
+            }
         }
-        
+        return true;
     }
-    public Cliente enviarObjeto(){
+
+    public Cliente enviarObjeto() {
         c = new Cliente();
         c.setStrIdentificacion(txtId.getText());
         c.setStrNombres(txtNombre.getText());
         c.setStrApellidos(txtApellido.getText());
         c.setStrDireccion(txtDireccion.getText());
-        c.setStrEmail(txtEmail.getText());
+        boolean res;
+        res = v.ValidaEmail(txtEmail.getText());
+        if (res == true) {
+            c.setStrEmail(txtEmail.getText());
+        } else {
+            c.setStrEmail("demo@utpl.edu.ec");
+        }
+        // Tomamos el ususario y contraseña del nombre de usuario del email.
+        String user_pass []= txtEmail.getText().split("@");
+        c.setStrUserName(user_pass[0]);
+        c.setStrPassword(user_pass[0]);
+
         return c;
     }
-    public void limpiar(){
+
+    public void limpiar() {
         txtId.setText(null);
         txtNombre.setText(null);
         txtApellido.setText(null);
@@ -241,26 +259,32 @@ public class JDRegistro extends javax.swing.JDialog {
     }
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         // TODO add your handling code here:
-        ValidarCampos();
-        enviarObjeto();
-        Registrar r = new Registrar();
-        try {
-            r.GuardaArchivoObjeto(c);
-            JOptionPane.showMessageDialog(null, "Datos guardados");
-        } catch (IOException ex) {
-            JOptionPane.showMessageDialog(null, "No se pudo registrar");
+        if (ValidarCampos() == true) {
+            enviarObjeto();
+            Registrar r = new Registrar();
+            try {
+                r.GuardaArchivoObjeto(c);
+                JOptionPane.showMessageDialog(null, "Datos guardados");
+            } catch (IOException ex) {
+                JOptionPane.showMessageDialog(null, "No se pudo registrar");
+            }
+            limpiar();
         }
-        limpiar();
+
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void txtNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreKeyTyped
         char c = evt.getKeyChar();
-        if((c<'a' || c>'z')&& (c<'A' || c>'Z'))evt.consume();
+        if ((c < 'a' || c > 'z') && (c < 'A' || c > 'Z')) {
+            evt.consume();
+        }
     }//GEN-LAST:event_txtNombreKeyTyped
 
     private void txtApellidoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtApellidoKeyTyped
         char c = evt.getKeyChar();
-        if((c<'a' || c>'z')&& (c<'A' || c>'Z'))evt.consume();
+        if ((c < 'a' || c > 'z') && (c < 'A' || c > 'Z')) {
+            evt.consume();
+        }
     }//GEN-LAST:event_txtApellidoKeyTyped
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed

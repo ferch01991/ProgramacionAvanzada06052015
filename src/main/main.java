@@ -9,8 +9,12 @@ import Clases.*;
 import GUI.JFIngreso;
 import GUI.JFRegistro;
 import Validaciones.Validar;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
 import java.util.Scanner;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -62,6 +66,7 @@ public class main {
         ingreso.setLocationRelativeTo(null);
         ingreso.show();
         
+    
         
     }
 
