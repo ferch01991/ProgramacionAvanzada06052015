@@ -212,6 +212,8 @@ public class JDRegistro extends javax.swing.JDialog {
     }//GEN-LAST:event_txtApellidoActionPerformed
 
     public boolean ValidarCampos() {
+        // Tomamos el usuario del correo el cual esta separado por el @.
+        String user_pass []= txtEmail.getText().split("@");
         if (txtId.getText().isEmpty() || txtNombre.getText().isEmpty() || txtApellido.getText().isEmpty()
                 || txtDireccion.getText().isEmpty() || txtFechaNace.getText().isEmpty() || txtEmail.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Todos los capos son requeridos");
@@ -220,7 +222,7 @@ public class JDRegistro extends javax.swing.JDialog {
             int opc = JOptionPane.showConfirmDialog(null, "Id: " + txtId.getText()
                     + "\nNombre: " + txtNombre.getText() + "\nApellido: " + txtApellido.getText()
                     + "\nDireccion: " + txtDireccion.getText() + "\nFecha de nacimiento: " + txtFechaNace.getText()
-                    + "\nEmail: " + txtEmail.getText(), "VERIFICAR DATOS", JOptionPane.OK_CANCEL_OPTION);
+                    + "\nEmail: " + txtEmail.getText()+ "\nUSUARIO: " + user_pass[0]+ "\nCONTRASEÑA: " + user_pass[0], "VERIFICAR DATOS", JOptionPane.OK_CANCEL_OPTION);
             if (opc == JOptionPane.CANCEL_OPTION) {
                 JOptionPane.showMessageDialog(null, "Rectificar datos");
                 return false;
@@ -256,6 +258,7 @@ public class JDRegistro extends javax.swing.JDialog {
         txtApellido.setText(null);
         txtDireccion.setText(null);
         txtEmail.setText(null);
+        txtFechaNace.setText(null);
     }
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         // TODO add your handling code here:

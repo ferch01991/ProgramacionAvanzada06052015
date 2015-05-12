@@ -65,12 +65,10 @@ public class Registrar {
         BufferedReader br = new BufferedReader(fr);
         String linea, userName = "", password="";
         while((linea=br.readLine())!=null){
-            int i=0;
             for(String datos:linea.split(",")){
-                i++;
-                if(i==6)
+                if (user.equals(datos))
                     userName = datos;
-                if(i==7)
+                if(pass.equals(datos))
                     password = datos;
             }
         }

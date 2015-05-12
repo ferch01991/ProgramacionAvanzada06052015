@@ -134,6 +134,10 @@ public class JFIngreso extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    public void limpiar(){
+        txtUserName.setText(null);
+        txtPassword.setText(null);
+    }
     private void btnIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngresarActionPerformed
         // TODO add your handling code here:
         Validar v = new Validar();
@@ -148,13 +152,13 @@ public class JFIngreso extends javax.swing.JFrame {
         }else{
             JOptionPane.showMessageDialog(null, "Ingreso no correcto");
         }
+        limpiar();
         
     }//GEN-LAST:event_btnIngresarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         // TODO add your handling code here:
-        txtUserName.setText(null);
-        txtPassword.setText(null);
+        limpiar();
         System.exit(0);
         
     }//GEN-LAST:event_btnCancelarActionPerformed
